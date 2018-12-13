@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600px" height="400px"></canvas>
+    <script>
+        // 获取元素
+        var myCanvas = document.querySelector('canvas')
+            //获取上下文  绘制工具箱
+        var ctx = myCanvas.getContext('2d');
+        //1.确定圆心  x  y
+        //2.确定半径   r   150px
+        //  3.确定起始点和结束位置  一弧度等于半径r    即一个圆有2π个弧度  
+        //4. 绘制的方向 默认是顺时针  false    逆时针是true
+        var x = ctx.canvas.width / 2;
+        var y = ctx.canvas.height / 2;
+        //把起始点放到圆心  让其自动闭合
+        ctx.moveTo(x, y);
+        ctx.arc(x, y, 150, 0, 3 * Math.PI / 2, true);
+        // ctx.closePath();  自动闭合
+        // ctx.stroke();   描边
+        ctx.fillStyle = 'skyblue';
+        ctx.fill(); //自动填充
+    </script>
+</body>
+
+</html>

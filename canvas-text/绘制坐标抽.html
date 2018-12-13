@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600px" height="400px"></canvas>
+    <script>
+        // 获取元素
+        var myCanvas = document.querySelector('canvas')
+            //获取上下文  绘制工具箱
+        var ctx = myCanvas.getContext('2d');
+        var lineHeight = ctx.canvas.height;
+        var lineWidth = ctx.canvas.width;
+        var space = 20;
+        var arrow = 10;
+        //计算原点
+        var x0 = space;
+        var y0 = lineHeight - space;
+        //绘制x轴
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(lineWidth - space, y0);
+        ctx.lineTo(lineWidth - space - arrow, y0 + arrow / 2);
+        ctx.lineTo(lineWidth - space - arrow, y0 - arrow / 2);
+        ctx.lineTo(lineWidth - space, y0);
+        ctx.fill();
+        ctx.stroke();
+        //绘制y轴
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(space, space);
+        ctx.lineTo(space + arrow / 2, space + arrow);
+        ctx.lineTo(space - arrow / 2, space + arrow);
+        ctx.lineTo(space, space);
+        ctx.fill();
+        ctx.stroke();
+        //
+    </script>
+</body>
+
+</html>

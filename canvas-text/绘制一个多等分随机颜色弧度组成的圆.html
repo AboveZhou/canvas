@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600px" height="400px"></canvas>
+    <script>
+        // 获取元素
+        var myCanvas = document.querySelector('canvas')
+            //获取上下文  绘制工具箱
+        var ctx = myCanvas.getContext('2d');
+        //1.确定圆心  x  y
+        //2.确定半径   r   150px
+        //  3.确定起始点和结束位置  一弧度等于半径r    即一个圆有2π个弧度  
+        //4. 绘制的方向 默认是顺时针  false    逆时针是true
+        var x = ctx.canvas.width / 2;
+        var y = ctx.canvas.height / 2;
+        //随机颜色函数
+        function getColor() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return "rgb(" + r + "," + g + "," + b + ")";
+        }
+        // 设定一个值num   均分成几等份
+        var num = 100;
+        //设定变量
+        var radian = Math.PI * 2 / num;
+        for (var i = 0; i < num; i++) {
+            // 设定一个每次起始点变量  startAngle
+            var startAngle = i * radian;
+            //设定一个每次结束点变量   endAngle    每次结束点就是下一次的起始点
+            var endAngle = (i + 1) * radian;
+            //开始每一次新轨迹
+            ctx.beginPath();
+            //把起始点移动到圆心
+            ctx.moveTo(x, y);
+            //开始画弧度
+            ctx.arc(x, y, 150, startAngle, endAngle);
+            //设定一个随机颜色   调用随机颜色函数
+            ctx.fillStyle = getColor();
+            ctx.fill();
+        }
+    </script>
+</body>
+
+</html>

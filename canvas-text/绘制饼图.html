@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600px" height="400px"></canvas>
+    <script>
+        // 获取元素
+        var myCanvas = document.querySelector('canvas')
+            //获取上下文  绘制工具箱
+        var ctx = myCanvas.getContext('2d');
+        //1.确定圆心  x  y
+        //2.确定半径   r   150px
+        //  3.确定起始点和结束位置  一弧度等于半径r    即一个圆有2π个弧度  
+        //4. 绘制的方向 默认是顺时针  false    逆时针是true
+        var x = ctx.canvas.width / 2;
+        var y = ctx.canvas.height / 2;
+        //随机颜色函数
+        function getColor() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return "rgb(" + r + "," + g + "," + b + ")";
+        }
+        // 班级人数  15-18岁  8人
+        //   18-20岁   12人
+        //  20-25岁   25人
+        //25 -30岁   15人
+        //  30岁以上   5人
+        var data = [8, 12, 24, 15, 5];
+        //遍历数组  把人数转化成弧度   设一个变量接收弧度新数组  
+        var arr = [];
+        var total = 0;
+        data.forEach(function(item, i) {
+                total = total + item;
+            })
+            // console.log(total);
+        data.forEach(function(item, i) {
+                var radian = 2 * Math.PI * item / total;
+                arr.push(radian);
+            })
+            // console.log(arr);
+            // 遍历新数组   开始画图
+            // 设一个变量记录起始位置  startAngle
+        var startAngle = 0;
+        arr.forEach(function(item, i) {
+            //设一个变量记录结束位置   endAngle   上一次的结束位置等于本次的起始位置;   那本次的结束位置等于上一次的结束位置加上本次弧度的长度
+            var endAngle = startAngle + item;
+            //开始每一次新轨迹
+            ctx.beginPath();
+            //把起始点移动到圆心
+            ctx.moveTo(x, y);
+            ctx.arc(x, y, 150, startAngle, endAngle);
+            //随机颜色填充
+            ctx.fillStyle = getColor();
+            ctx.fill();
+            //记录本次的结束位置    让本次结束位置作为下一次的起始位置
+            startAngle = endAngle;
+        })
+    </script>
+</body>
+
+</html>
